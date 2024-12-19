@@ -5,7 +5,7 @@
 #ifndef BITCOIN_CRYPTO_COMMON_H
 #define BITCOIN_CRYPTO_COMMON_H
 
-#include <compat/endian.h>
+#include "../compat/endian_compat.h"
 
 #include <cstdint>
 #include <cstring>

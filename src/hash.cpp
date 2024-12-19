@@ -2,13 +2,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <hash.h>
-#include <span.h>
-#include <crypto/common.h>
-#include <crypto/hmac_sha512.h>
-
 #include <bit>
 #include <string>
+
+#include "hash.h"
+#include "span.h"
+#include "crypto/common.h"
+#include "crypto/hmac_sha512.h"
 
 unsigned int MurmurHash3(unsigned int nHashSeed, Span<const unsigned char> vDataToHash)
 {

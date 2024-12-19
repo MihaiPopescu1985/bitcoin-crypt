@@ -9,10 +9,6 @@
 #ifndef BITCOIN_UTIL_STRENCODINGS_H
 #define BITCOIN_UTIL_STRENCODINGS_H
 
-#include <crypto/hex_base.h> // IWYU pragma: export
-#include <span.h>
-#include <util/string.h>
-
 #include <array>
 #include <bit>
 #include <charconv>
@@ -25,6 +21,10 @@
 #include <system_error>
 #include <type_traits>
 #include <vector>
+
+#include "../crypto/hex_base.h"
+#include "../span.h"
+#include "string_util.h"
 
 /** Used by SanitizeString() */
 enum SafeChars

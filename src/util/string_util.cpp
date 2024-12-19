@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <util/string.h>
-
 #include <regex>
 #include <string>
+
+#include "string.h"
 
 namespace util {
 void ReplaceAll(std::string& in_out, const std::string& search, const std::string& substitute)

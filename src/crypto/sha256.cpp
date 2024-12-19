@@ -2,17 +2,17 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <bitcoin-build-config.h> // IWYU pragma: keep
-
-#include <crypto/sha256.h>
-#include <crypto/common.h>
+// #include <crypto/bitcoin-build-config.h> // IWYU pragma: keep
 
 #include <algorithm>
 #include <cassert>
 #include <cstring>
 
+#include "sha256.h"
+#include "common.h"
+
 #if !defined(DISABLE_OPTIMIZED_SHA256)
-#include <compat/cpuid.h>
+#include "../compat/cpuid_compat.h"
 
 #if defined(__linux__) && defined(ENABLE_ARM_SHANI)
 #include <sys/auxv.h>
@@ -584,7 +584,7 @@ bool AVXEnabled()
 } // namespace
 
 
-std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implementation)
+std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implementation [[maybe_unused]])
 {
     std::string ret = "standard";
     Transform = sha256::Transform;
@@ -635,8 +635,8 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
 
     if (have_sse4) {
 #if defined(__x86_64__) || defined(__amd64__)
-        Transform = sha256_sse4::Transform;
-        TransformD64 = TransformD64Wrapper<sha256_sse4::Transform>;
+        Transform = sha256::Transform;
+        TransformD64 = TransformD64Wrapper<sha256::Transform>;
         ret = "sse4(1way)";
 #endif
 #if defined(ENABLE_SSE41)

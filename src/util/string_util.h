@@ -5,8 +5,6 @@
 #ifndef BITCOIN_UTIL_STRING_H
 #define BITCOIN_UTIL_STRING_H
 
-#include <span.h>
-
 #include <array>
 #include <cstdint>
 #include <cstring>
@@ -15,6 +13,8 @@
 #include <string>      // IWYU pragma: export
 #include <string_view> // IWYU pragma: export
 #include <vector>
+
+#include "../span.h"
 
 namespace util {
 namespace detail {

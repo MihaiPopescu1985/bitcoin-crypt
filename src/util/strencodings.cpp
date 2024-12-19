@@ -3,11 +3,6 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <util/strencodings.h>
-
-#include <crypto/hex_base.h>
-#include <span.h>
-
 #include <array>
 #include <cassert>
 #include <cstring>
@@ -16,6 +11,10 @@
 #include <ostream>
 #include <string>
 #include <vector>
+
+#include "strencodings.h"
+#include "../crypto/hex_base.h"
+#include "../span.h"
 
 static const std::string CHARS_ALPHA_NUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 

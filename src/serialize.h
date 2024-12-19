@@ -6,12 +6,6 @@
 #ifndef BITCOIN_SERIALIZE_H
 #define BITCOIN_SERIALIZE_H
 
-#include <attributes.h>
-#include <compat/assumptions.h> // IWYU pragma: keep
-#include <compat/endian.h>
-#include <prevector.h>
-#include <span.h>
-
 #include <algorithm>
 #include <concepts>
 #include <cstdint>
@@ -24,6 +18,12 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+#include "attributes.h"
+#include "compat/assumptions.h" // IWYU pragma: keep
+#include "compat/endian_compat.h"
+#include "prevector.h"
+#include "span.h"
 
 /**
  * The maximum size of a serialized object in bytes or number of elements

@@ -3,9 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <uint256.h>
-
-#include <util/strencodings.h>
+#include "uint256.h"
+#include "util/strencodings.h"
 
 template <unsigned int BITS>
 std::string base_blob<BITS>::GetHex() const

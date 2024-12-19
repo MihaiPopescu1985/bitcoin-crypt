@@ -6,11 +6,6 @@
 #ifndef BITCOIN_UINT256_H
 #define BITCOIN_UINT256_H
 
-#include <crypto/common.h>
-#include <span.h>
-#include <util/strencodings.h>
-#include <util/string.h>
-
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -19,6 +14,11 @@
 #include <optional>
 #include <string>
 #include <string_view>
+
+#include "crypto/common.h"
+#include "span.h"
+#include "util/strencodings.h"
+#include "util/string_util.h"
 
 /** Template base class for fixed-sized opaque blobs. */
 template<unsigned int BITS>

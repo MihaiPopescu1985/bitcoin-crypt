@@ -1,66 +1,46 @@
 cmake_minimum_required(VERSION 3.10)
-project(standalone_crypto CXX)
+project(btc_crypt CXX)
 
-set(CMAKE_CXX_STANDARD 20) # Crucial: Set to C++20
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -std=c++20") # Explicit flag (if needed)
 
-# Set include directories (Crucial!)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})       # For files like uint256.h, etc. in root
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/compat)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/crypto)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/util)
+find_package(Threads REQUIRED)
 
-# Create the shared library (ONLY .cpp files here!)
-add_library(crypto SHARED
+# Find the GCC include directory for cpuid.h
+execute_process(
+    COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=include
+    OUTPUT_VARIABLE GCC_INCLUDE_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+add_executable(btc_crypt
     base58.cpp
-    crypto_wrapper.cpp
     hash.cpp
+    main.cpp
     uint256.cpp
     crypto/hex_base.cpp
+    crypto/hmac_sha512.cpp
     crypto/ripemd160.cpp
     crypto/sha256.cpp
+    crypto/sha512.cpp
     util/strencodings.cpp
-    util/string.cpp
+    util/string_util.cpp
 )
 
-# Set the target properties for header file installation
-set_target_properties(crypto PROPERTIES
-    PUBLIC_HEADER "crypto_wrapper.h" # Only the public header
-    OUTPUT_NAME "crypto"
+# TODO: for static linking
+# set_target_properties(btc_crypt PROPERTIES LINKER_LANGUAGE CXX) # Not necessary, CXX is the default
+# set_target_properties(btc_crypt PROPERTIES LINK_FLAGS "-static")
+
+target_include_directories(btc_crypt
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/compat
+    ${CMAKE_CURRENT_SOURCE_DIR}/crypto
+    ${GCC_INCLUDE_DIR}
 )
 
-# Install targets (install header files)
-install(TARGETS crypto
-    EXPORT crypto-export
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-)
+target_link_libraries(btc_crypt PRIVATE Threads::Threads)
 
-install(FILES
-    attributes.h
-    base58.h
-    crypto_wrapper.h
-    hash.h
-    prevector.h
-    serialize.h
-    span.h
-    uint256.h
-    compat/assumptions.h
-    compat/byteswap.h
-    compat/endian.h
-    crypto/common.h
-    crypto/hex_base.h
-    crypto/ripemd160.h
-    crypto/sha256.h
-    util/strencodings.h
-    util/string.h
-    DESTINATION include
-)
-
-install(EXPORT crypto-export
-    FILE crypto-targets.cmake
-    NAMESPACE crypto::
-    DESTINATION lib/cmake/crypto
-)
+# TODO: for static linking
+# if(UNIX AND NOT APPLE)
+#     set_target_properties(btc_crypt PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
+# endif()

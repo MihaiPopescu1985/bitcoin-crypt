@@ -5,10 +5,10 @@
 #ifndef BITCOIN_COMPAT_ENDIAN_H
 #define BITCOIN_COMPAT_ENDIAN_H
 
-#include <compat/byteswap.h>
+#include "byteswap.h"
 
-#include <bit>
 #include <cstdint>
+#include <bit>
 
 inline BSWAP_CONSTEXPR uint16_t htobe16_internal(uint16_t host_16bits)
 {

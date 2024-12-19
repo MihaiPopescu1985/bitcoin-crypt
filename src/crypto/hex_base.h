@@ -5,11 +5,11 @@
 #ifndef BITCOIN_CRYPTO_HEX_BASE_H
 #define BITCOIN_CRYPTO_HEX_BASE_H
 
-#include <span.h>
-
 #include <cstddef>
 #include <cstdint>
 #include <string>
+
+#include "../span.h"
 
 /**
  * Convert a span of bytes to a lower-case hexadecimal string.
